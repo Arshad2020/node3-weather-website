@@ -2,7 +2,7 @@ const request = require("request");
 
 const forecast = (latitude, longitude, callback) => {
   const url =
-    "http://api.weatherstack.com/current?access_key=8cf78b463a4dccfca6ef49cda44bf3a0&query=" +
+    "http://api.weatherstack.com/current?access_key=f81e2e492550f72416392d8aff8840b3&query=" +
     latitude +
     ",";
   longitude + "&units=f";
@@ -15,12 +15,14 @@ const forecast = (latitude, longitude, callback) => {
     } else {
       callback(
         undefined,
-        body.daily.data[0].summary +
-          " It is currently " +
-          body.currently.temperature +
-          " degress out. There is a " +
-          body.currently.precipProbability +
-          "% chance of rain."
+        body.current.weather_descriptions[0] +
+          ". It is currently " +
+          body.current.temperature +
+          " degress out. It feels like " +
+          body.current.feelslike +
+          " degrees out. The humidity " +
+          body.current.humidity +
+          "%."
       );
     }
   });
